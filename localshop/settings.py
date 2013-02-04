@@ -233,9 +233,10 @@ class Base(Settings):
 
     LOCALSHOP_DISTRIBUTION_STORAGE = 'storages.backends.overwrite.OverwriteStorage'
 
-
-LOCALSHOP_SETTINGS_FILE = os.environ['LOCALSHOP_SETTINGS_FILE']
-SETTINGS_FILE_PATH = '~/.localshop/localshop.conf.py' if not LOCALSHOP_SETTINGS_FILE else LOCALSHOP_SETTINGS_FILE
+try:
+    SETTINGS_FILE_PATH = os.environ['LOCALSHOP_SETTING_FILE']
+except KeyError:
+    SETTINGS_FILE_PATH = '~/localshop/localshop.conf.py'
 
 
 class Localshop(FileSettings(SETTINGS_FILE_PATH), Base):
